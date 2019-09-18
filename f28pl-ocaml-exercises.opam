@@ -1,0 +1,13 @@
+opam-version: "1.0"
+name: "f28pl-ocaml-exercises"
+version: "0.1"
+synopsis: "Ocaml programming exercises for F28PL"
+description: """
+Programming Languages F28PL Ocaml exercises
+"""
+maintainer: "Rob Stewart <R.Stewart@hw.ac.uk>"
+authors: "Rob Stewart <R.Stewart@hw.ac.uk>"
+license: "GPL3"
+homepage: "https://gitlab-student.macs.hw.ac.uk/f28pl-2019-20/f28pl-2019-20-ocaml-exercises"
+bug-reports: "https://gitlab-student.macs.hw.ac.uk/f28pl-2019-20/f28pl-2019-20-ocaml-exercises/issues"
+depends: [ "ocaml" "ocamlfind" "ounit" "qcheck" "dune" ]
