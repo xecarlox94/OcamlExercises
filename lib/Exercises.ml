@@ -1,21 +1,24 @@
 
 exception NotImplementedYet
 
-(*
+(* concatenate two strings
+
 # concat "hello" "world" ;;
 - : string = "helloworld"
  *)
 let concat : string -> string -> string =
   fun string1 string2 -> failwith "not implemented yet" ;;
 
-(*
+(* turn a word into a plural by adding 's' character to the end
+
 # pluralise "toy" ;;
 - : string = "toys"
  *)
 let pluralise : string -> string =
   fun string1 -> failwith "not implemented yet" ;;
 
-(*
+(* return the first 3 characters of a word
+
 # first_three "happy" ;;
 - : string = "hap"
 
@@ -30,7 +33,10 @@ let pluralise : string -> string =
 let first_three : string -> string =
   fun string1 -> failwith "not implemented yet" ;;
 
-(*
+(* returns logical opposite of a boolean
+
+   OCaml has a built in primitive 'not'
+
 # logical_not true ;;
 - : bool = false
 # logical_not false ;;
@@ -39,7 +45,9 @@ let first_three : string -> string =
 let logical_not : bool -> bool =
   fun b -> failwith "not implemented yet" ;;
 
-(* now implement the same function using pattern matching *)
+(* now implement the same function by
+   pattern matching on the input boolean value
+*)
 let logical_not' : bool -> bool =
   fun b -> failwith "not implemented yet" ;;
 
@@ -82,14 +90,17 @@ type person = Person of string * int ;;
 let jon = Person ("Jon",45) ;;
 let sarah = Person ("Sarah",23) ;;
 
-(*
+(* return the age of a value of type 'person'
+
 # age_of jon ;;
 - : int = 45
  *)
 let age_of : person -> int =
   fun person1 -> failwith "not implemented yet" ;;
 
-(*
+(* take two values of type 'person' and return the
+   person who has the old age.
+
 # who_is_older jon sarah ;;
 - : person = Person ("Jon", 45)
 
@@ -98,35 +109,45 @@ let age_of : person -> int =
 let who_is_older : person -> person -> person =
   fun person1 person2 -> failwith "not implemented yet" ;;
 
-(*
+(* return true if two input person values have the
+   same age.
+
 # same_age jon sarah ;;
 - : bool = false
  *)
 let same_age : person -> person -> bool =
   fun person1 person2 -> failwith "not implemented yet" ;;
 
-(*
+(* add two integers together
+
 # add_int 2 4 ;;
 - : int = 6
  *)
 let add_int : int -> int -> int =
   fun i j -> failwith "not implemented yet" ;;
 
-(*
+(* add two floats together
+
 # add_float 2.3 2.1 ;;
 - : float = 4.4
  *)
 let add_float : float -> float -> float =
   fun i j -> failwith "not implemented yet" ;;
 
-(* TODO: add type signature to this function *)
+(* output the double of the input integer
+
+TODO: add type signature to this function
+ *)
 let double_int =
   fun i -> failwith "not implemented yet" ;;
 
+(* returns true if the input integer is an even value *)
 let is_even : int -> bool =
   fun i -> (i mod 2) = 0 ;;
 
-(*
+(* return true if the input integer list contains
+   any even values, return false otherwise.
+
 # any_evens [] ;;
 - : bool = false
 # any_evens [1;2;3] ;;
@@ -137,8 +158,9 @@ let is_even : int -> bool =
 let rec any_evens : int list -> bool =
   fun xs -> failwith "not implemented yet" ;;
 
-(* Is the first element in the list an even number?
-   Return false for empty lists.
+(* Return true if the first element in the list an
+   even number, return false otherwise. Also return
+   false for empty input lists.
 
 is_head_even [] ;;
 - : bool = false
@@ -150,9 +172,8 @@ is_head_even [4;5;6] ;;
 let is_head_even : int list -> bool =
   fun xs -> failwith "not implemented yet" ;;
 
-(*
- Return true if the list has 3 or more elements.
- You're not allowed to use the List module.
+(* Return true if the list has 3 or more elements.
+   You're not allowed to use the List module.
 
 # large_list [] ;;
 - : bool = false
@@ -168,12 +189,18 @@ let large_list : 'a list -> bool =
 let rec map (f:'a -> 'b) (xs:'a list) : 'b list =
   failwith "not implemented yet" ;;
 
-(*
+(* Filter values in the input list that satisfy the
+   given predicate function, i.e. the predicate function
+   returns true for that element. Return a list containing
+   only the values that satisfy the predicate.
+
 # filter is_even [1;2] ;;
 - : int list = [2]
  *)
 let rec filter : ('a -> bool) -> 'a list -> 'a list =
   fun f xs -> failwith "not implemented yet" ;;
+
+(* some person examples *)
 
 let susan = Person ("Susan",41) ;;
 let paula = Person ("Paula",29) ;;
@@ -181,12 +208,16 @@ let jason = Person ("Jason",16) ;;
 let bella = Person ("Bella",76) ;;
 let lisa = Person ("Lisa",30) ;;
 
+(* Return true if the input person has an age that is
+   between 18 and 30 (inclusive).
+ *)
 let age_between_18_30 : person -> bool =
   fun p -> failwith "not implemented yet" ;;
 
-(* return only the persons in the 18-30 club
+(* Return only the persons in the 18-30 club
    (aged between 18 and 30).
-   Use the 'filter' function above.
+   
+   Use the 'filter' function you have defined above.
 
 # club_18_30 [susan;paula;jason;bella;lisa] ;;
 - : person list = [Person ("Paulo", 29); Person ("Lisa", 30)]
@@ -194,9 +225,10 @@ let age_between_18_30 : person -> bool =
 let club_18_30 : person list -> person list =
   fun people -> failwith "not implemented yet" ;;
 
-(* return a tuple of integer. The first integer
-   is the number of persons less than 40 years old,
-   the second integer is the number of persons 40+ years old.
+(* Return a tuple of integers. The first integer
+   in the tuple is the number of persons less than
+   40 years old, the second integer is the number
+   of persons 40+ years old.
 
 # count_40_plus [susan;paula;jason;bella;lisa] ;;
 - : int * int = (3, 2)
@@ -204,9 +236,14 @@ let club_18_30 : person list -> person list =
 let count_40_plus : person list -> int * int =
   fun persons -> failwith "not implemented yet" ;;
 
+(* exception for impossible operations on lists *)
 exception ListException of string
 
-(*
+(* Return the last element in a list.
+   If applied to an empty list, return the ListException
+   with the exception message:
+      "cannot 'last' on empty list"
+
 # last_elem [1] ;;
 - : int = 1
 # last_elem [] ;;
@@ -217,7 +254,7 @@ Exception: ListException "cannot 'last' on empty list".
 let rec last_elem : 'a list -> 'a =
   fun xs -> failwith "not implemented yet" ;;
 
-(* reverse the elements of a list
+(* Reverse the elements of a list.
 
 # reverse_list [1;2;3] ;;
 - : int list = [3; 2; 1]
@@ -232,7 +269,7 @@ Hint: the infix '@' operator appends two lists e.g.
 let rec reverse_list : 'a list -> 'a list =
   fun xs -> failwith "not implemented yet" ;;
 
-(* return true if any element is true
+(* Return true if any element is true, false otherwise.
 
 # list_or [] ;;
 - : bool = false
@@ -244,7 +281,8 @@ let rec reverse_list : 'a list -> 'a list =
 let rec list_or : bool list -> bool =
   fun xs -> failwith "not implemented yet" ;;
 
-(* returns true if all elements are true
+(* Returns true if all elements are true, false otherwise.
+   Return false for empty input lists.
 
 # list_all_true [] ;;
 - : bool = false
@@ -256,7 +294,7 @@ let rec list_or : bool list -> bool =
 let rec list_all_true : bool list -> bool =
   fun xs -> failwith "not implemented yet" ;;
 
-(* replicate a value N number of time in a list
+(* Replicate a value N number of time to create a list.
 
 # replicate_elem 1 "hello" ;;
 - : string list = ["hello"]
@@ -268,8 +306,8 @@ let rec list_all_true : bool list -> bool =
 let rec replicate_elem : int -> 'a -> 'a list =
   fun n x -> failwith "not implemented yet" ;;
 
-(* return the list up to the element that does not satisfy
-   the predicate function.
+(* Return the input list up to the element that
+   does not satisfy the predicate function.
 
 # take_while (fun x -> x < 3) [1;2;3;4;1;2;3;4] ;;
 - : int list = [1; 2]
@@ -281,8 +319,8 @@ let rec replicate_elem : int -> 'a -> 'a list =
 let rec take_while : ('a -> bool) -> 'a list -> 'a list =
   fun f xs -> failwith "not implemented yet" ;;
 
-(* This function takes two lists and returns true if the
-   first list is a prefix of the second.
+(* Return true if the first list is a prefix of the second.
+   Return true if either input list is empty.
 
 # is_prefix_of [1;2] [1;2] ;;
 - : bool = true
@@ -300,9 +338,9 @@ let rec take_while : ('a -> bool) -> 'a list -> 'a list =
 let rec is_prefix_of : 'a list -> 'a list -> bool =
   fun xs ys -> failwith "not implemented yet" ;;
 
-(* Elementwise, combine two lists together. At each position in the
-   lists, creating a tuple containing each element as a tuple 
-   at that position from the two lists.
+(* Combine two lists together elementwise. At each position
+   in the lists, creating a tuple in the output list containing
+   each element at that position from the two lists, as a tuple.
 
 # zip_lists [] [] ;;
 - : ('a * 'b) list = []
@@ -314,10 +352,10 @@ let rec is_prefix_of : 'a list -> 'a list -> bool =
 let rec zip_lists : 'a list -> 'b list -> ('a * 'b) list =
   fun xs ys -> failwith "not implemented yet" ;;
 
-(* Elementwise, combine two lists together with a user defined
+(* Combine two lists together elementwise with a user defined
    function. At each position in the lists, creating a new value
-   at that position from the two lists, as determined by the
-   user defined function.
+   in the output list at that position from the two lists, as
+   determined by the user defined function.
 
 # zip_lists_with (fun x y -> x*y) [1;2;3] [2;2;2] ;;
 - : int list = [2; 4; 6]
@@ -339,11 +377,19 @@ type binary_tree =
   | Leaf of int
   | Tree of binary_tree * binary_tree ;;
 
+(* Some binary trees. Hint: draw them, it will help with
+   implementing the functions below. *)
+
 let tree1 = Leaf 4 ;;
 let tree2 = Tree (Leaf 5 , (Tree (Leaf 8, Leaf 9))) ;;
 let tree3 = Tree (Leaf 5 , Leaf 6) ;;
 
-(*
+(* Recall: you performed counting/summing binary tree nodes
+           in SD3 in Java. The Ocaml implementations will
+           be shorter than equivalent Java code. *) 
+
+(* Count the number of nodes in the input binary tree.
+
 # count_leaves tree1 ;;
 - : int = 1
 # count_leaves tree2 ;;
@@ -354,7 +400,8 @@ let tree3 = Tree (Leaf 5 , Leaf 6) ;;
 let rec count_leaves : binary_tree -> int =
   fun tree -> failwith "not implemented yet" ;;
 
-(*
+(* Sum the integer values of all nodes in the input binary tree.
+
 # sum_leaves tree1 ;;
 - : int = 4
 # sum_leaves tree2 ;;
@@ -365,10 +412,28 @@ let rec count_leaves : binary_tree -> int =
 let rec sum_leaves : binary_tree -> int =
   fun tree -> failwith "not implemented yet" ;;
 
-(* recursive bubble sort *)
+(* You implemented bubble sort and quick sort in SD3 in Java.
+   Now try in OCaml.
+
+   To test your implements, add unit tests and property tests
+   in test/ExercisesTests.ml .
+
+   Idea for a property test: generate a random integer list
+   with a QuickCheck generator function, then apply the
+   bubble_sort and quick_sort functoins to that list and make
+   sure that their returned values are equal.
+ *)
+
+(* Bubble sort
+   
+   Sort an input integer list using a recursive bubble sort function.
+ *)
 let rec bubble_sort (xs:int list) : int list =
   failwith "not implemented yet";;
 
-(* recursive quick sort *)
+(* Quick sort
+
+   Sort an input integer list using a recursive quick sort function.
+ *)
 let rec quick_sort (xs:int list) : int list =
   failwith "not implemented yet";;
