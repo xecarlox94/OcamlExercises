@@ -7,7 +7,7 @@ exception NotImplementedYet
 - : string = "helloworld"
  *)
 let concat : string -> string -> string =
-  fun string1 string2 -> failwith "not implemented yet" ;;
+  fun string1 string2 -> string1 ^ string2 ;;
 
 (* turn a word into a plural by adding 's' character to the end
 
@@ -15,7 +15,7 @@ let concat : string -> string -> string =
 - : string = "toys"
  *)
 let pluralise : string -> string =
-  fun string1 -> failwith "not implemented yet" ;;
+  fun string1 -> string1 ^ "" ;;
 
 (* return the first 3 characters of a word
 
@@ -31,7 +31,7 @@ let pluralise : string -> string =
   sub : string -> int -> int -> string
  *)
 let first_three : string -> string =
-  fun string1 -> failwith "not implemented yet" ;;
+  fun string1 -> String.sub string1 0 3 ;;
 
 (* returns logical opposite of a boolean
 
@@ -43,7 +43,7 @@ let first_three : string -> string =
 - : bool = true
  *)
 let logical_not : bool -> bool =
-  fun b -> failwith "not implemented yet" ;;
+  fun b -> not b ;;
 
 (* now implement the same function by
    pattern matching on the input boolean value
@@ -58,7 +58,7 @@ let logical_not' : bool -> bool =
      F F => F
  *)
 let truth_table_and : bool -> bool -> bool =
-  fun b1 b2 -> failwith "not implemented yet" ;;
+  fun b1 b2 -> b1 && b2 ;;
 
 (* logical XOR:
      T T => F
