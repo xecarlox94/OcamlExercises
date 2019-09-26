@@ -80,11 +80,11 @@ let truth_table_xnor : bool -> bool -> bool =
 
 (* return first element in the tuple *)
 let tuple_first : int * string -> int =
-  fun (i,s) -> failwith "not implemented yet" ;;
+  fun (i,s) -> i ;;
 
 (* return second element in the tuple *)
 let tuple_second : int * string -> string =
-  fun (i,s) -> failwith "not implemented yet" ;;
+  fun (i,s) -> s ;;
 
 type person = Person of string * int ;;
 let jon = Person ("Jon",45) ;;
