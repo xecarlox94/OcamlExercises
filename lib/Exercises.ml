@@ -124,7 +124,7 @@ let same_age : person -> person -> bool =
 - : int = 6
  *)
 let add_int : int -> int -> int =
-  fun i j -> failwith "not implemented yet" ;;
+  fun i j -> i + j ;;
 
 (* add two floats together
 
