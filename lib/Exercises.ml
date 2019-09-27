@@ -198,8 +198,15 @@ let is_head_even : int list -> bool =
 # large_list [1;1;1] ;;
 - : bool = true
  *)
+
+let rec list_length : 'a list  -> int =
+  fun xs -> 
+    match xs with 
+      [] -> 0
+      | (x::rest) -> 1 + list_length rest ;;
+
 let large_list : 'a list -> bool =
-  fun xs -> failwith "not implemented yet" ;;
+  fun xs -> (list_length xs) >= 3 ;;
 
 (* apply a function to every element in the list *)
 let rec map (f:'a -> 'b) (xs:'a list) : 'b list =
