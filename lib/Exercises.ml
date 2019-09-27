@@ -49,7 +49,10 @@ let logical_not : bool -> bool =
    pattern matching on the input boolean value
 *)
 let logical_not' : bool -> bool =
-  fun b -> failwith "not implemented yet" ;;
+  fun b -> 
+    match b with
+      true -> false
+      | false -> true ;;
 
 (* logical AND:
      T T => T
