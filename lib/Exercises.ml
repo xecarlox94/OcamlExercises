@@ -99,7 +99,9 @@ let sarah = Person ("Sarah",23) ;;
 - : int = 45
  *)
 let age_of : person -> int =
-  fun person1 -> failwith "not implemented yet" ;;
+  fun person1 -> 
+    match person1 with
+      Person ( s, i ) -> i ;;
 
 (* take two values of type 'person' and return the
    person who has the old age.
