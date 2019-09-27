@@ -178,7 +178,9 @@ is_head_even [4;5;6] ;;
 - : bool = true
  *)
 let is_head_even : int list -> bool =
-  fun xs -> failwith "not implemented yet" ;;
+  fun xs ->
+    match xs with
+      (x::rest) -> is_even x ;;
 
 (* Return true if the list has 3 or more elements.
    You're not allowed to use the List module.
