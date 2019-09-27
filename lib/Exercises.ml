@@ -112,7 +112,10 @@ let age_of : person -> int =
   hint: use the 'age_of' function
  *)
 let who_is_older : person -> person -> person =
-  fun person1 person2 -> failwith "not implemented yet" ;;
+  fun person1 person2 -> 
+    if ( age_of person1 > age_of person2 )
+    then person1
+    else person2 ;;
 
 (* return true if two input person values have the
    same age.
