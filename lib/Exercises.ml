@@ -228,7 +228,9 @@ let lisa = Person ("Lisa",30) ;;
    between 18 and 30 (inclusive).
  *)
 let age_between_18_30 : person -> bool =
-  fun p -> failwith "not implemented yet" ;;
+  fun p -> 
+    match p with
+      Person ( s, i ) -> ( i >= 18 && i <= 30 ) ;;
 
 (* Return only the persons in the 18-30 club
    (aged between 18 and 30).
@@ -295,7 +297,10 @@ let rec reverse_list : 'a list -> 'a list =
 - : bool = false
  *)
 let rec list_or : bool list -> bool =
-  fun xs -> failwith "not implemented yet" ;;
+  fun xs -> 
+    match xs with
+      [] -> false
+      | (x::rest) -> x || list_or rest ;;
 
 (* Returns true if all elements are true, false otherwise.
    Return false for empty input lists.
