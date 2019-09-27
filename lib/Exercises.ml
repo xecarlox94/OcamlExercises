@@ -124,7 +124,7 @@ let who_is_older : person -> person -> person =
 - : bool = false
  *)
 let same_age : person -> person -> bool =
-  fun person1 person2 -> failwith "not implemented yet" ;;
+  fun person1 person2 -> age_of person1 = age_of person2 ;;
 
 (* add two integers together
 
