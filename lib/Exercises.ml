@@ -210,7 +210,9 @@ let large_list : 'a list -> bool =
 
 (* apply a function to every element in the list *)
 let rec map (f:'a -> 'b) (xs:'a list) : 'b list =
-  failwith "not implemented yet" ;;
+  match xs with
+    [] -> []
+    | (x::rest) -> (f x) :: map f rest ;;
 
 (* Filter values in the input list that satisfy the
    given predicate function, i.e. the predicate function
