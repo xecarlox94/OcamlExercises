@@ -76,7 +76,7 @@ let truth_table_xor : bool -> bool -> bool =
      F F => T
  *)
 let truth_table_xnor : bool -> bool -> bool =
-  fun b1 b2 -> failwith "not implemented yet" ;;
+  fun b1 b2 -> ( b1 && b2 || not b1 && not b2 ) ;;
 
 (* return first element in the tuple *)
 let tuple_first : int * string -> int =
