@@ -67,7 +67,7 @@ let truth_table_and : bool -> bool -> bool =
      F F => F
  *)
 let truth_table_xor : bool -> bool -> bool =
-  fun b1 b2 -> failwith "not implemented yet" ;;
+  fun b1 b2 -> not ( b1 && b2 || not b1 && not b2 ) ;;
 
 (* logical XNOR:
      T T => T
