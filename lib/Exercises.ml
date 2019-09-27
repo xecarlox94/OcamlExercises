@@ -223,7 +223,13 @@ let rec map (f:'a -> 'b) (xs:'a list) : 'b list =
 - : int list = [2]
  *)
 let rec filter : ('a -> bool) -> 'a list -> 'a list =
-  fun f xs -> failwith "not implemented yet" ;;
+  fun f xs -> 
+    match xs with
+      [] -> []
+      | (x::rest) -> 
+        if(f x)
+        then x :: filter f rest
+        else filter f rest ;;
 
 (* some person examples *)
 
