@@ -164,7 +164,13 @@ let is_even : int -> bool =
 - : bool = false
  *)
 let rec any_evens : int list -> bool =
-  fun xs -> failwith "not implemented yet" ;;
+  fun xs -> 
+    match xs with
+      [] -> false
+      | (x::rest) ->
+        if (is_even x)
+        then true || any_evens rest
+        else false || any_evens rest ;;
 
 (* Return true if the first element in the list an
    even number, return false otherwise. Also return
