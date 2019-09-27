@@ -139,7 +139,7 @@ let add_float : float -> float -> float =
 TODO: add type signature to this function
  *)
 let double_int =
-  fun i -> failwith "not implemented yet" ;;
+  fun i -> i * 2 ;;
 
 (* returns true if the input integer is an even value *)
 let is_even : int -> bool =
