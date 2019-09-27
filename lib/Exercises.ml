@@ -132,7 +132,7 @@ let add_int : int -> int -> int =
 - : float = 4.4
  *)
 let add_float : float -> float -> float =
-  fun i j -> failwith "not implemented yet" ;;
+  fun i j -> i +. j ;;
 
 (* output the double of the input integer
 
