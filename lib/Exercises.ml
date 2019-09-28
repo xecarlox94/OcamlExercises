@@ -256,7 +256,7 @@ let age_between_18_30 : person -> bool =
 - : person list = [Person ("Paulo", 29); Person ("Lisa", 30)]
 *)
 let club_18_30 : person list -> person list =
-  fun people -> failwith "not implemented yet" ;;
+  fun people -> filter age_between_18_30 people ;;
 
 (* Return a tuple of integers. The first integer
    in the tuple is the number of persons less than
