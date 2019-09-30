@@ -352,7 +352,10 @@ let rec list_all_true : bool list -> bool =
 - : string list = []
  *)
 let rec replicate_elem : int -> 'a -> 'a list =
-  fun n x -> failwith "not implemented yet" ;;
+  fun n x ->
+    if( n <= 0 )
+    then []
+    else x :: replicate_elem ( n - 1 ) x ;;
 
 (* Return the input list up to the element that
    does not satisfy the predicate function.
