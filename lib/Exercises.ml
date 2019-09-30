@@ -186,7 +186,8 @@ is_head_even [4;5;6] ;;
 let is_head_even : int list -> bool =
   fun xs ->
     match xs with
-      (x::rest) -> is_even x ;;
+      (x::rest) -> is_even x
+      | [] -> false ;;
 
 (* Return true if the list has 3 or more elements.
    You're not allowed to use the List module.
@@ -266,6 +267,13 @@ let club_18_30 : person list -> person list =
 # count_40_plus [susan;paula;jason;bella;lisa] ;;
 - : int * int = (3, 2)
  *)
+
+let is_40_over : person -> bool =
+  fun person ->
+    match person with
+      Person (s, i) -> i >= 40 ;;
+
+
 let count_40_plus : person list -> int * int =
   fun persons -> failwith "not implemented yet" ;;
 
@@ -285,7 +293,11 @@ Exception: ListException "cannot 'last' on empty list".
 - : int = 3
  *)
 let rec last_elem : 'a list -> 'a =
-  fun xs -> failwith "not implemented yet" ;;
+  fun xs -> 
+    match xs with
+    [x] -> x 
+    | (xs::rest) -> last_elem rest
+    | [] -> raise (ListException "cannot 'last' on empty list") ;;
 
 (* Reverse the elements of a list.
 
