@@ -340,7 +340,10 @@ let rec list_or : bool list -> bool =
 - : bool = true
  *)
 let rec list_all_true : bool list -> bool =
-  fun xs -> failwith "not implemented yet" ;;
+  fun xs -> 
+    match xs with
+      [] -> true
+      | (x::rest) -> x && list_all_true rest ;;
 
 (* Replicate a value N number of time to create a list.
 
