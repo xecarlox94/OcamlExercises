@@ -1,3 +1,7 @@
 (test
   (name ExercisesTests)
   (libraries Exercises oUnit qcheck))
+
+(env
+  (dev
+    (flags (:standard -warn-error -A))))
