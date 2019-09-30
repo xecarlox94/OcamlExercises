@@ -371,7 +371,13 @@ let rec replicate_elem : int -> 'a -> 'a list =
 - : int list = []
  *)
 let rec take_while : ('a -> bool) -> 'a list -> 'a list =
-  fun f xs -> failwith "not implemented yet" ;;
+  fun f xs -> 
+    match xs with
+      [] -> []
+      | (x::rest) -> 
+          if( f x ) 
+          then x :: take_while f rest
+          else take_while f rest ;;
 
 (* Return true if the first list is a prefix of the second.
    Return true if either input list is empty.
