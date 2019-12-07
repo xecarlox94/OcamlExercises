@@ -7,7 +7,7 @@ exception NotImplementedYet
 - : string = "helloworld"
  *)
 let concat : string -> string -> string =
-  fun string1 string2 -> string1 ^ string2 ;;
+  fun s1 s2 -> s1 ^ s2 ;;
 
 (* turn a word into a plural by adding 's' character to the end
 
@@ -15,7 +15,7 @@ let concat : string -> string -> string =
 - : string = "toys"
  *)
 let pluralise : string -> string =
-  fun string1 -> string1 ^ "" ;;
+  fun s -> s ^ "s" ;;
 
 (* return the first 3 characters of a word
 
@@ -31,7 +31,7 @@ let pluralise : string -> string =
   sub : string -> int -> int -> string
  *)
 let first_three : string -> string =
-  fun string1 -> String.sub string1 0 3 ;;
+  fun s1 -> String.sub s1 0 3 ;;
 
 (* returns logical opposite of a boolean
 
@@ -49,7 +49,7 @@ let logical_not : bool -> bool =
    pattern matching on the input boolean value
 *)
 let logical_not' : bool -> bool =
-  fun b -> 
+  fun b ->
     match b with
       true -> false
       | false -> true ;;
@@ -70,7 +70,12 @@ let truth_table_and : bool -> bool -> bool =
      F F => F
  *)
 let truth_table_xor : bool -> bool -> bool =
-  fun b1 b2 -> not ( b1 && b2 || not b1 && not b2 ) ;;
+  fun b1 b2 ->
+    match b1, b2 with
+      true, true -> true
+      | true, false -> false
+      | false, true -> false
+      | false, false -> true ;;
 
 (* logical XNOR:
      T T => T
@@ -79,15 +84,20 @@ let truth_table_xor : bool -> bool -> bool =
      F F => T
  *)
 let truth_table_xnor : bool -> bool -> bool =
-  fun b1 b2 -> ( b1 && b2 || not b1 && not b2 ) ;;
+  fun b1 b2 ->
+    match b1, b2 with
+      true, true -> true
+      | true, false -> false
+      | false, true -> false
+      | false, false -> true ;;
 
 (* return first element in the tuple *)
 let tuple_first : int * string -> int =
-  fun (i,s) -> i ;;
+  fun ( i, s ) -> i ;;
 
 (* return second element in the tuple *)
 let tuple_second : int * string -> string =
-  fun (i,s) -> s ;;
+  fun ( i, s ) -> s ;;
 
 type person = Person of string * int ;;
 let jon = Person ("Jon",45) ;;
@@ -99,9 +109,9 @@ let sarah = Person ("Sarah",23) ;;
 - : int = 45
  *)
 let age_of : person -> int =
-  fun person1 -> 
-    match person1 with
-      Person ( s, i ) -> i ;;
+  fun person -> 
+    match person with
+      Person ( _ , age) -> age ;;
 
 (* take two values of type 'person' and return the
    person who has the old age.
@@ -112,10 +122,10 @@ let age_of : person -> int =
   hint: use the 'age_of' function
  *)
 let who_is_older : person -> person -> person =
-  fun person1 person2 -> 
-    if ( age_of person1 > age_of person2 )
-    then person1
-    else person2 ;;
+  fun p1 p2 ->
+    if ( ( age_of p1 ) > ( age_of p2 ) )
+    then p1
+    else p2 ;;
 
 (* return true if two input person values have the
    same age.
@@ -124,7 +134,9 @@ let who_is_older : person -> person -> person =
 - : bool = false
  *)
 let same_age : person -> person -> bool =
-  fun person1 person2 -> age_of person1 = age_of person2 ;;
+  fun person1 person2 -> 
+    match person1, person2 with
+      Person (_, age1), Person (_, age2) -> age1 = age2 ;;
 
 (* add two integers together
 
@@ -132,7 +144,7 @@ let same_age : person -> person -> bool =
 - : int = 6
  *)
 let add_int : int -> int -> int =
-  fun i j -> i + j ;;
+  fun i1 i2 -> i1 + i2 ;;
 
 (* add two floats together
 
@@ -140,18 +152,18 @@ let add_int : int -> int -> int =
 - : float = 4.4
  *)
 let add_float : float -> float -> float =
-  fun i j -> i +. j ;;
+  fun f1 f2 -> f1 +. f2 ;;
 
 (* output the double of the input integer
 
 TODO: add type signature to this function
  *)
-let double_int =
+let double_int: int -> int  =
   fun i -> i * 2 ;;
 
 (* returns true if the input integer is an even value *)
 let is_even : int -> bool =
-  fun i -> (i mod 2) = 0 ;;
+  fun i -> ( i mod 2 ) = 0;;
 
 (* return true if the input integer list contains
    any even values, return false otherwise.
@@ -167,8 +179,9 @@ let rec any_evens : int list -> bool =
   fun xs -> 
     match xs with
       [] -> false
-      | (x::rest) ->
-        if (is_even x)
+      | [element] -> is_even element
+      | (head::rest) ->
+        if (is_even head)
         then true || any_evens rest
         else false || any_evens rest ;;
 
@@ -204,16 +217,16 @@ let rec list_length : 'a list  -> int =
   fun xs -> 
     match xs with 
       [] -> 0
-      | (x::rest) -> 1 + list_length rest ;;
+      | (_::rest) -> 1 + list_length rest ;;
 
 let large_list : 'a list -> bool =
   fun xs -> (list_length xs) >= 3 ;;
 
 (* apply a function to every element in the list *)
 let rec map (f:'a -> 'b) (xs:'a list) : 'b list =
-  match xs with
-    [] -> []
-    | (x::rest) -> (f x) :: map f rest ;;
+    match xs with
+      [] -> []
+      | (x::rest) -> ( f x ) :: map f rest;;
 
 (* Filter values in the input list that satisfy the
    given predicate function, i.e. the predicate function
@@ -224,11 +237,11 @@ let rec map (f:'a -> 'b) (xs:'a list) : 'b list =
 - : int list = [2]
  *)
 let rec filter : ('a -> bool) -> 'a list -> 'a list =
-  fun f xs -> 
+  fun f xs ->
     match xs with
       [] -> []
       | (x::rest) -> 
-        if(f x)
+        if ( f x )
         then x :: filter f rest
         else filter f rest ;;
 
@@ -246,7 +259,7 @@ let lisa = Person ("Lisa",30) ;;
 let age_between_18_30 : person -> bool =
   fun p -> 
     match p with
-      Person ( s, i ) -> ( i >= 18 && i <= 30 ) ;;
+      Person(_, age) -> ( age >= 18 ) && ( age <= 30 ) ;;
 
 (* Return only the persons in the 18-30 club
    (aged between 18 and 30).
@@ -257,7 +270,7 @@ let age_between_18_30 : person -> bool =
 - : person list = [Person ("Paulo", 29); Person ("Lisa", 30)]
 *)
 let club_18_30 : person list -> person list =
-  fun people -> filter age_between_18_30 people ;;
+  fun list -> filter age_between_18_30 list ;;
 
 (* Return a tuple of integers. The first integer
    in the tuple is the number of persons less than
@@ -269,13 +282,22 @@ let club_18_30 : person list -> person list =
  *)
 
 let is_40_over : person -> bool =
-  fun person ->
-    match person with
-      Person (s, i) -> i >= 40 ;;
+  fun p ->
+    match p with
+      Person(_, age) -> age > 40 ;;
 
 
 let count_40_plus : person list -> int * int =
-  fun persons -> failwith "not implemented yet" ;;
+  fun pList ->
+    let rec count_40s: ( int * int ) -> person list -> ( int * int ) =
+      fun tuple people ->
+        match people, tuple with
+          [], tuple -> tuple
+          | (x::rest), ( i1, i2 ) ->
+            if ( is_40_over x )
+            then count_40s ( i1 , (i2 + 1) ) rest
+            else count_40s ( (i1 + 1), i1 ) rest
+    in count_40s ( 0, 0 ) pList ;;
 
 (* exception for impossible operations on lists *)
 exception ListException of string
@@ -293,11 +315,11 @@ Exception: ListException "cannot 'last' on empty list".
 - : int = 3
  *)
 let rec last_elem : 'a list -> 'a =
-  fun xs -> 
+  fun xs ->
     match xs with
-    [x] -> x 
-    | (xs::rest) -> last_elem rest
-    | [] -> raise (ListException "cannot 'last' on empty list") ;;
+      [x] -> x
+      | (_::rest) -> last_elem rest 
+      | [] -> raise (ListException "cannot 'last' on empty list") ;;
 
 (* Reverse the elements of a list.
 
@@ -311,8 +333,18 @@ let rec last_elem : 'a list -> 'a =
 Hint: the infix '@' operator appends two lists e.g.
       list1 @ list2
 *)
+
+(* let rec insert_last: 'a -> 'a list -> 'a list =
+  fun x list ->
+    match list with
+      [] -> [x]
+      | (x::rest) -> x :: insert_last x rest ;; *)
+
 let rec reverse_list : 'a list -> 'a list =
-  fun xs -> failwith "not implemented yet" ;;
+  fun xs -> 
+   match xs with
+    [] -> []
+    | (head::rest) -> (reverse_list rest) @ [head] ;;
 
 (* Return true if any element is true, false otherwise.
 
@@ -324,10 +356,11 @@ let rec reverse_list : 'a list -> 'a list =
 - : bool = false
  *)
 let rec list_or : bool list -> bool =
-  fun xs -> 
+  fun xs ->
     match xs with
-      [] -> false
-      | (x::rest) -> x || list_or rest ;;
+      [x] -> x
+      | ( x::rest ) -> x || list_or rest
+      | _ -> false ;;
 
 (* Returns true if all elements are true, false otherwise.
    Return false for empty input lists.
@@ -340,10 +373,11 @@ let rec list_or : bool list -> bool =
 - : bool = true
  *)
 let rec list_all_true : bool list -> bool =
-  fun xs -> 
+  fun xs ->
     match xs with
-      [] -> true
-      | (x::rest) -> x && list_all_true rest ;;
+      [x] -> x
+      | (x::rest) -> x && list_all_true rest
+      | _ -> false ;;
 
 (* Replicate a value N number of time to create a list.
 
@@ -355,10 +389,10 @@ let rec list_all_true : bool list -> bool =
 - : string list = []
  *)
 let rec replicate_elem : int -> 'a -> 'a list =
-  fun n x ->
-    if( n <= 0 )
-    then []
-    else x :: replicate_elem ( n - 1 ) x ;;
+  fun i el ->
+    match i with
+      0 -> []
+      | x -> el :: replicate_elem ( x - 1) el ;;
 
 (* Return the input list up to the element that
    does not satisfy the predicate function.
@@ -371,13 +405,13 @@ let rec replicate_elem : int -> 'a -> 'a list =
 - : int list = []
  *)
 let rec take_while : ('a -> bool) -> 'a list -> 'a list =
-  fun f xs -> 
+  fun f xs ->
     match xs with
       [] -> []
       | (x::rest) -> 
-          if( f x ) 
-          then x :: take_while f rest
-          else take_while f rest ;;
+        if ( f x )
+        then x :: take_while f rest
+        else [] ;;
 
 (* Return true if the first list is a prefix of the second.
    Return true if either input list is empty.
@@ -396,7 +430,11 @@ let rec take_while : ('a -> bool) -> 'a list -> 'a list =
 - : bool = true
  *)
 let rec is_prefix_of : 'a list -> 'a list -> bool =
-  fun xs ys -> failwith "not implemented yet" ;;
+  fun xs ys ->
+    match xs, ys with
+      [], _ -> true
+      | _::_, [] -> false
+      | (xhead::xrest), (yhead::yrest) -> ( xhead = yhead ) && is_prefix_of xrest yrest ;;
 
 (* Combine two lists together elementwise. At each position
    in the lists, creating a tuple in the output list containing
@@ -410,7 +448,12 @@ let rec is_prefix_of : 'a list -> 'a list -> bool =
 - : (bool * int) list = [(true, 1); (true, 2); (false, 3)]
  *)
 let rec zip_lists : 'a list -> 'b list -> ('a * 'b) list =
-  fun xs ys -> failwith "not implemented yet" ;;
+  fun xs ys -> 
+    match xs, ys with
+      [], [] -> []
+      | _::_, [] -> []
+      | (x::xrest), (y::yrest) -> ( x, y ) :: zip_lists xrest yrest
+      | _, _ -> [] ;;
 
 (* Combine two lists together elementwise with a user defined
    function. At each position in the lists, creating a new value
@@ -428,7 +471,12 @@ let rec zip_lists : 'a list -> 'b list -> ('a * 'b) list =
  *)
 let rec zip_lists_with
         : ('a -> 'b -> 'c) -> 'a list -> 'b list -> 'c list =
-  fun f xs ys -> failwith "not implemented yet" ;;
+  fun f xs ys -> 
+    match xs, ys with
+      [], [] -> []
+      | _::_, [] -> []
+      | (x::xrest), (y::yrest) -> (f x y) :: zip_lists_with f xrest yrest
+      | _, _ -> [] ;;
 
 (* binary tree of integers.
     A node is either a leaf or a parent of two child trees
@@ -458,7 +506,10 @@ let tree3 = Tree (Leaf 5 , Leaf 6) ;;
 - : int = 2
  *)
 let rec count_leaves : binary_tree -> int =
-  fun tree -> failwith "not implemented yet" ;;
+  fun tree -> 
+    match tree with
+      Leaf l -> 1
+      | Tree (l1, l2) -> ( count_leaves l1 ) + ( count_leaves l2 ) ;;
 
 (* Sum the integer values of all nodes in the input binary tree.
 
@@ -470,7 +521,10 @@ let rec count_leaves : binary_tree -> int =
 - : int = 11
  *)
 let rec sum_leaves : binary_tree -> int =
-  fun tree -> failwith "not implemented yet" ;;
+  fun tree -> 
+    match tree with
+      Leaf l -> l
+      | Tree ( l1, l2 ) -> (sum_leaves l1) + (sum_leaves l2) ;;
 
 (* You implemented bubble sort and quick sort in SD3 in Java.
    Now try in OCaml.
