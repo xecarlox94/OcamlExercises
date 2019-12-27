@@ -544,7 +544,7 @@ let rec sum_leaves : binary_tree -> int =
       0, _ -> xs
       | c, [] -> []
       | c, (x::[]) -> [x]
-      | c, (x::y::xs) -> min x y :: swapUntill (c - 1) (max x y::xs) ;;
+      | c, (x::y::rest) -> min x y :: swapUntill (c - 1) (max x y::rest) ;;
 
 (* Bubble sort
    
@@ -564,4 +564,9 @@ let rec bubble_sort (xs:int list) : int list =
    Sort an input integer list using a recursive quick sort function.
  *)
 let rec quick_sort (xs:int list) : int list =
-  failwith "not implemented yet";;
+  match xs with
+    [] -> []
+    | (x::rest) ->
+      let sml_seg = quick_sort (filter (fun a -> a <= x) rest)
+      in let big_seg =  quick_sort (filter (fun a -> a > x) rest)
+      in sml_seg @ [x] @ big_seg ;;
