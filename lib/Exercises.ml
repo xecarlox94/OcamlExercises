@@ -538,12 +538,26 @@ let rec sum_leaves : binary_tree -> int =
    sure that their returned values are equal.
  *)
 
+ let rec swapUntill: int -> 'a list -> 'a list =
+  fun i xs ->
+    match i, xs with
+      0, _ -> xs
+      | c, [] -> []
+      | c, (x::[]) -> [x]
+      | c, (x::y::xs) -> min x y :: swapUntill (c - 1) (max x y::xs) ;;
+
 (* Bubble sort
    
    Sort an input integer list using a recursive bubble sort function.
  *)
 let rec bubble_sort (xs:int list) : int list =
-  failwith "not implemented yet";;
+  let rec go_bSort xs limit = 
+    if limit > 0
+    then 
+      let swapped = swapUntill limit xs 
+      in go_bSort swapped (limit - 1)
+    else xs
+  in go_bSort xs (list_length xs -1 ) ;;
 
 (* Quick sort
 
